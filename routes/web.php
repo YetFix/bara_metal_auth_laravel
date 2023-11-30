@@ -19,7 +19,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $users = \App\Models\User::all();
+    $cuser = auth()->user()->email;
+    return view('dashboard',compact('users','cuser'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
